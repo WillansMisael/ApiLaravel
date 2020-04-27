@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests\Post as PostRequests;
 use App\Http\Resources\Post as PostResources;
+use App\Http\Resources\PostCollection;
 
 class PostController extends Controller
 {
@@ -24,7 +25,13 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        //puedo usar eso 
+        //return Post::get();
+        //pero la forma correcta es
+        return response()->json(
+            new PostCollection(
+                $this->post->orderBy('id','desc')->get()
+        ));
 
     }
 
