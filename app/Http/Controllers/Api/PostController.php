@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Post;
 use Illuminate\Http\Request;
 
+use App\Http\Resources\Post as PostResources;
+
 class PostController extends Controller
 {
     /**
@@ -37,7 +39,14 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return new PostResources($post);
+        /*
+        return [
+            'id'=> $post->id,
+            'post_name'=> strtoupper($post->title),
+            'post_body'=> strtoupper(substr($post->body, 0, 240)). '...'
+        ];
+        */
     }
 
     /**
