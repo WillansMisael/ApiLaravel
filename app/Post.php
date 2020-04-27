@@ -6,6 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
+    //carga de datos masiva
+    protected $fillable = [
+        'title', 'body'
+    ];
+
+
     /*
     protected $hidden = ['title', 'body'];
     protected $appends = ['post_name', 'post_excerpt'];
