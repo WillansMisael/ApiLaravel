@@ -14,6 +14,15 @@ class PostController extends Controller
 {
     protected $post;
 
+    /** 
+        * 1xx : errores informativos
+        * 2xx : respuestas exitosas
+        * 3xx : redireccion
+        * 4xx : errores del cliente
+        * 5xx : errores del servidor
+      
+    **/
+
     public function __construct(Post $post)
     {
         $this->post = $post;
@@ -31,7 +40,8 @@ class PostController extends Controller
         return response()->json(
             new PostCollection(
                 $this->post->orderBy('id','desc')->get()
-        ));
+            )
+        );
 
     }
 
@@ -47,6 +57,7 @@ class PostController extends Controller
         $post = $this->post->create($request->all());
 
         return response()->json(new PostResources($post), 201);
+        //201 rescurso creado    
     }
 
     /**
@@ -94,5 +105,6 @@ class PostController extends Controller
         $post->delete();
 
         return response()->json(null, 204);
+        // 204 no estamos retornando ningun contenido y el retorno es null
     }
 }
